@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">VideoCoverPickerExample</string>
+    <string name="cover">cover</string>
+    <string name="pick_cover">Pick cover</string>
 </resources>
