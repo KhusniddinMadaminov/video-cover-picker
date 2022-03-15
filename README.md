@@ -1,5 +1,6 @@
 # video-cover-picker
-Library for Instagram like pick cover for video:
+Library for Instagram like pick cover for video
+
 Video demo:
 
 
