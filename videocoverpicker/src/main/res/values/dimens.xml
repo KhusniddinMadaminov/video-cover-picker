@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="video_width">56dp</dimen>
+    <dimen name="seekbar_width">56dp</dimen>
+    <dimen name="margin">32dp</dimen>
     <dimen name="video_height">88dp</dimen>
 </resources>

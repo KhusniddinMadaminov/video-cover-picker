@@ -5,8 +5,14 @@ import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Build
+import uz.umar.videocoverpicker.R
+import uz.umar.videocoverpicker.utils.DisplayMetricsUtil.dpToPx
+import kotlin.math.ceil
 
 object CoverUtils {
+
+    private var standardCoverWidth = 56
+    var totalHorizontalPadding = 32
 
     fun getBitmapAtFrame(
         context: Context,
@@ -31,5 +37,24 @@ object CoverUtils {
             e.printStackTrace()
         }
         return bitmap
+    }
+
+    fun getCoverWidth(context: Context): Int {
+        val screenWidth =
+            context.resources.displayMetrics.run { widthPixels / density } - totalHorizontalPadding
+        val approxThumbnailCount = ceil(((screenWidth) / standardCoverWidth).toDouble())
+        var coverWidth = screenWidth / approxThumbnailCount
+        coverWidth = dpToPx(context, coverWidth.toInt()).toDouble()
+        return coverWidth.toInt()
+    }
+
+    fun getCoverHeight(context: Context): Int {
+        return context.resources.getDimensionPixelSize(R.dimen.video_height)
+    }
+
+    fun getApproxThumbnailCount(context: Context): Int {
+        val screenWidth =
+            context.resources.displayMetrics.run { widthPixels / density } - totalHorizontalPadding
+        return ceil(((screenWidth) / standardCoverWidth).toDouble()).toInt()
     }
 }

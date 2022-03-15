@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewTreeObserver
 import kotlinx.android.synthetic.main.activity_cover_picker.*
 import uz.umar.videocoverpicker.listener.SeekListener
@@ -14,7 +15,6 @@ class CoverPickerActivity : AppCompatActivity() {
     companion object {
         const val COVER_POSITION = "COVER_POSITION"
         const val VIDEO_URI = "VIDEO_URI"
-
         fun getStartIntent(context: Context, uri: Uri, thumbnailPosition: Long = 0): Intent {
             val intent = Intent(context, CoverPickerActivity::class.java)
             intent.putExtra(VIDEO_URI, uri)
@@ -31,6 +31,7 @@ class CoverPickerActivity : AppCompatActivity() {
         videoUri = intent.getParcelableExtra(VIDEO_URI)!!
         setupVideoContent()
         done_button.setOnClickListener { finishWithData() }
+        cancel_button.setOnClickListener { finish() }
     }
 
     private fun setupVideoContent() {

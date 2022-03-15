@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uz.umar.videocoverpicker">
 
-    <application>
+    <application android:theme="@style/Theme.VideoCoverPickerExample">
         <activity
             android:name=".CoverPickerActivity"
             android:exported="false" />

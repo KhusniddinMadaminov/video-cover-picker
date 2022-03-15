@@ -3,7 +3,7 @@ package uz.umar.videocoverpicker.views
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
-import uz.umar.videocoverpicker.R
+import uz.umar.videocoverpicker.utils.CoverUtils
 
 class CoverView @JvmOverloads constructor(
     context: Context,
@@ -13,8 +13,10 @@ class CoverView @JvmOverloads constructor(
     init {
         scaleType = ScaleType.CENTER_CROP
         alpha = 0.4f
-        val width = resources.getDimensionPixelSize(R.dimen.video_width)
-        val height = resources.getDimensionPixelSize(R.dimen.video_height)
-        layoutParams = LinearLayout.LayoutParams(width, height)
+        layoutParams = LinearLayout.LayoutParams(
+            CoverUtils.getCoverWidth(context),
+            CoverUtils.getCoverHeight(context)
+        )
     }
+
 }

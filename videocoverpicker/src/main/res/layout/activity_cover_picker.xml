@@ -39,7 +39,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/thubnail_layout"
+        android:id="@+id/thumbnail_layout"
         android:layout_width="192dp"
         android:layout_height="342dp"
         android:layout_marginTop="16dp"
@@ -57,17 +57,32 @@
             android:layout_gravity="center" />
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="To select a cover image, choose a frame from your video or an image from your camera roll."
+        app:layout_constraintBottom_toTopOf="@id/timeline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/thumbnail_layout" />
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/timeline"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/video_height"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="32dp"
+        app:cardBackgroundColor="@color/gray"
         app:cardCornerRadius="8dp"
         app:cardElevation="0dp"
         app:cardUseCompatPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/thubnail_layout">
+        app:layout_constraintTop_toBottomOf="@id/description">
 
         <uz.umar.videocoverpicker.views.CoverTimeLine
             android:id="@+id/thumbs"

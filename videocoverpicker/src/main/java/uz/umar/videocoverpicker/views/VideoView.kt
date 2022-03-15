@@ -84,8 +84,6 @@ class VideoView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     override fun onSurfaceTextureSizeChanged(p0: SurfaceTexture, p1: Int, p2: Int) {}
-
     override fun onSurfaceTextureDestroyed(p0: SurfaceTexture): Boolean = false
-
     override fun onSurfaceTextureUpdated(p0: SurfaceTexture) {}
 }

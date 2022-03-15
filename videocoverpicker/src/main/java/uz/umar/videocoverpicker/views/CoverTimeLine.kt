@@ -8,10 +8,10 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.timeline_view.view.*
 import uz.umar.videocoverpicker.R
 import uz.umar.videocoverpicker.listener.SeekListener
+import uz.umar.videocoverpicker.utils.CoverUtils
 import uz.umar.videocoverpicker.utils.DisplayMetricsUtil
 import kotlin.math.roundToInt
 
@@ -41,16 +41,6 @@ class CoverTimeLine @JvmOverloads constructor(
         frameDimension = context.resources.getDimensionPixelOffset(R.dimen.video_height)
         isFocusable = true
         isFocusableInTouchMode = true
-        setBackgroundColor(ContextCompat.getColor(context, R.color.white))
-        elevation = 8f
-
-        val margin = DisplayMetricsUtil.convertDpToPixel(16f, context).toInt()
-        val params = LayoutParams(
-            LayoutParams.WRAP_CONTENT,
-            LayoutParams.WRAP_CONTENT
-        )
-        params.setMargins(margin, 0, margin, 0)
-        layoutParams = params
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -61,12 +51,14 @@ class CoverTimeLine @JvmOverloads constructor(
     }
 
     private fun handleTouchEvent(event: MotionEvent) {
-        val seekViewWidth = context.resources.getDimensionPixelSize(R.dimen.video_height)
+        val seekViewWidth = context.resources.getDimensionPixelSize(R.dimen.seekbar_width)
         currentSeekPosition = (event.x.roundToInt() - (seekViewWidth / 2)).toFloat()
 
-        val availableWidth = container_covers.width -
-                (layoutParams as LayoutParams).marginEnd -
-                (layoutParams as LayoutParams).marginStart
+        val availableWidth =
+            container_covers.width - DisplayMetricsUtil.dpToPx(
+                context,
+                2 * CoverUtils.totalHorizontalPadding
+            )
         if (currentSeekPosition + seekViewWidth > container_covers.right) {
             currentSeekPosition = (container_covers.right - seekViewWidth).toFloat()
         } else if (currentSeekPosition < container_covers.left) {
@@ -89,11 +81,11 @@ class CoverTimeLine @JvmOverloads constructor(
             MediaMetadataRetriever.METADATA_KEY_DURATION
         )?.toInt() ?: 0) * 1000).toLong()
 
-        val thumbnailCount = 10
+        val thumbnailCount = CoverUtils.getApproxThumbnailCount(context)
 
         val interval = videoLength / thumbnailCount
 
-        for (i in 0 until thumbnailCount - 1) {
+        for (i in 0 until thumbnailCount) {
             val frameTime = i * interval
             var bitmap =
                 metaDataSource.getFrameAtTime(frameTime, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)

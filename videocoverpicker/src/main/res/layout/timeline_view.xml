@@ -12,7 +12,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/container_seek_bar"
-        android:layout_width="@dimen/video_width"
+        android:layout_width="@dimen/seekbar_width"
         android:layout_height="@dimen/video_height"
         app:cardBackgroundColor="@color/gray"
         app:cardCornerRadius="8dp"
